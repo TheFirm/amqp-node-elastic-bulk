@@ -1,0 +1,19 @@
+{
+  "name": "amqp-elastic",
+  "version": "0.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "amqp": "~0.2.0",
+    "elasticsearch": "~2.4.1",
+    "intel": "^1.0.0-b4"
+  },
+  "devDependencies": {
+    "elasticsearch": "^2.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
