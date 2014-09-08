@@ -1,8 +1,7 @@
 var elasticsearch = require('elasticsearch');
+var config = require('./configs/config.json');
 
-var client = elasticsearch.Client({
-    host: 'localhost:9200'
-});
+var client = elasticsearch.Client(config.elastic);
 
 /**
  * Send data to elasticsearch bulk API

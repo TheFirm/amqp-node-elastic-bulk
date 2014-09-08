@@ -2,6 +2,12 @@ var tools = {};
 
 module.exports = tools;
 
+var fs = require('fs');
+
+var CONST = {
+    CONFIG_PATH: 'configs/config.json'
+};
+
 /**
  * Converts AMQP message string to ElasticSearch Bulk format
  * @param {String} str AMQP message
@@ -20,4 +26,13 @@ tools.fromAmqpJSONToElasticBulkFormat = function (str) {
         {index: elasticBulkAction},
         elasticBulkData
     ];
+};
+
+tools.checkConfigExist = function () {
+    fs.exists(CONST.CONFIG_PATH, function(exists) {
+        if (!exists) {
+            console.log('Missing config.json file, copy it from config-example.json');
+            process.exit(-1);
+        }
+    });
 };

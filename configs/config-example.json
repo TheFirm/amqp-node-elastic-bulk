@@ -1,0 +1,12 @@
+{
+    "elasticSearch": {
+        "host": "localhost:9200"
+    },
+    "amqp": {
+        "host": "localhost",
+        "port": 5672,
+        "login": "guest",
+        "password": "guest",
+        "vhost": "/"
+    }
+}

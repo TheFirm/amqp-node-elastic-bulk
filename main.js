@@ -1,14 +1,14 @@
 "use strict";
 
+var helpers = new require('./helpers');
+helpers.checkConfigExist();
+
+var config = require('./configs/config.json');
 var amqp = new require('amqp');
 var util = new require("util");
-var helpers = new require('./helpers');
 var elastic = new require('./elastic');
 var intel = new require('./logger');
 
-var connection = amqp.createConnection({
-    host: 'localhost'
-});
 
 var countMessagesPerBulk = 0;
 var messageBuffer = [];
@@ -16,6 +16,8 @@ var messageBuffer = [];
 //Time limit to flush messages to elasticsearch
 // 5 sec in ms
 var TIME_LIMIT_TO_FLUSH = 5000;
+
+var connection = amqp.createConnection(config.amqp);
 
 connection.on('ready', function () {
     intel.getLogger('app').info('connection: ready');
@@ -66,7 +68,9 @@ function bufferMessageEmpty() {
 
 process.on('exit', function () {
     intel.getLogger('app').info("Closing...");
-    connection.disconnect();
+    if(connection){
+        connection.disconnect();
+    }
 });
 
 
