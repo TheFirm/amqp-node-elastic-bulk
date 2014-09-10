@@ -5,7 +5,7 @@ module.exports = tools;
 var fs = require('fs');
 
 var CONST = {
-    CONFIG_PATH: 'configs/config.json'
+    CONFIG_PATH: __dirname + '/configs/config.json'
 };
 
 /**
