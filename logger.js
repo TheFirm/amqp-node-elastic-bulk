@@ -23,21 +23,21 @@ intel.config({
         'elasticErrors': {
             'class': intel.handlers.Rotating,
             'level': intel.ERROR,
-            'file': 'logs/elastic.errors.log',
+            'file': __dirname + '/logs/elastic.errors.log',
             'formatter': 'details'
         },
 
         'app': {
             'class': intel.handlers.Rotating,
             'level': intel.INFO,
-            'file': 'logs/app.log',
+            'file': __dirname + '/logs/app.log',
             'formatter': 'details'
         },
 
         'app.errors': {
             'class': intel.handlers.Rotating,
             'level': intel.ERROR,
-            'file': 'logs/app.errors.log',
+            'file': __dirname + '/logs/app.errors.log',
             'formatter': 'details'
         }
     },
