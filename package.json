@@ -6,7 +6,7 @@
   "dependencies": {
     "amqp": "~0.2.0",
     "elasticsearch": "~2.4.1",
-    "intel": "^1.0.0-b4"
+    "intel": "1.0.0-b4"
   },
   "devDependencies": {
     "elasticsearch": "^2.4.1"
