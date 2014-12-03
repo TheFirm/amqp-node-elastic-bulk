@@ -8,7 +8,7 @@ var amqp = new require('amqp');
 var util = new require("util");
 var elastic = new require('./elastic');
 var intel = new require('./logger');
-
+var sendGrid = new require('./sendGrid');
 
 var countMessagesPerBulk = 0;
 var messageBuffer = [];
@@ -39,6 +39,23 @@ connection.on('ready', function () {
             });
 
             messageObject.acknowledge();
+        });
+    });
+    // Send Email
+    connection.queue('email', function(queue) {
+
+        queue.bind('email');
+
+        queue.subscribe({ack: true}, function(message) {
+            var emailObject = JSON.parse(message.data.toString());
+
+            if (sendGrid.send(emailObject)) {
+                message.acknowledge();
+                intel.getLogger('app').info('message send::' + emailObject.to);
+            } else {
+                intel.getLogger('app').error(emailObject);
+            }
+
         });
     });
 });

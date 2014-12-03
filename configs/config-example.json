@@ -8,5 +8,9 @@
         "login": "guest",
         "password": "guest",
         "vhost": "/"
+    },
+    "sendgrid": {
+        "user": "test",
+        "pass": "test"
     }
 }
