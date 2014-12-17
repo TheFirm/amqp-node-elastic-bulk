@@ -22,25 +22,25 @@ var connection = amqp.createConnection(config.amqp);
 connection.on('ready', function () {
     intel.getLogger('app').info('connection: ready');
     // Use the default 'amq.topic' exchange
-    connection.queue('toElastic', function (q) {
-
-        q.bind('toElastic', function () {
-            intel.getLogger('app').info('queue bounded to exchange');
-        });
-
-        // Receive messages
-        q.subscribe({ack: true, prefetchCount: 1000}, function (message, headers, deliveryInfo, messageObject) {
-            var str = message.data.toString();
-            countMessagesPerBulk++;
-
-            var elasticBulkMessage = helpers.fromAmqpJSONToElasticBulkFormat(str);
-            elasticBulkMessage.forEach(function (item) {
-                messageBuffer.push(item);
-            });
-
-            messageObject.acknowledge();
-        });
-    });
+    //connection.queue('toElastic', function (q) {
+    //
+    //    q.bind('toElastic', function () {
+    //        intel.getLogger('app').info('queue bounded to exchange');
+    //    });
+    //
+    //    // Receive messages
+    //    q.subscribe({ack: true, prefetchCount: 1000}, function (message, headers, deliveryInfo, messageObject) {
+    //        var str = message.data.toString();
+    //        countMessagesPerBulk++;
+    //
+    //        var elasticBulkMessage = helpers.fromAmqpJSONToElasticBulkFormat(str);
+    //        elasticBulkMessage.forEach(function (item) {
+    //            messageBuffer.push(item);
+    //        });
+    //
+    //        messageObject.acknowledge();
+    //    });
+    //});
     // Send Email
     connection.queue('email', function(queue) {
 
