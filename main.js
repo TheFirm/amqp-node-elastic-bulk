@@ -60,10 +60,10 @@ connection.on('ready', function () {
     });
 });
 
-setInterval(sendBufferToElastic, TIME_LIMIT_TO_FLUSH);
+//setInterval(sendBufferToElastic, TIME_LIMIT_TO_FLUSH);
 
-function sendBufferToElastic(){
-    if(bufferMessageEmpty()){
+function sendBufferToElastic() {
+    if(bufferMessageEmpty()) {
         return;
     }
 
