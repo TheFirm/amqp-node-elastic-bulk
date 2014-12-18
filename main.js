@@ -14,12 +14,14 @@ var io = require('socket.io')(3001);
 
 io.on('connection', function (socket) {
     io.emit('typing', { will: 'be received by everyone'});
-
-    socket.on('private message', function (from, msg) {
+    intel.getLogger('app').info('IO connection');
+    socket.on('typing', function (from, msg) {
+        intel.getLogger('app').info('IO typing');
         console.log('I received a private message by ', from, ' saying ', msg);
     });
 
     socket.on('disconnect', function () {
+        intel.getLogger('app').info('IO disconnect');
         io.sockets.emit('user disconnected');
     });
 });
