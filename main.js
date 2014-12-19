@@ -9,19 +9,8 @@ var util = new require("util");
 var elastic = new require('./elastic');
 var intel = new require('./logger');
 var sendGrid = new require('./sendGrid');
+var sockets = new require('./sockets');
 
-var io = require('socket.io').listen(3001);
-
-
-io.sockets.on('connection', function (socket) {
-    io.sockets.emit('typing');
-    intel.getLogger('app').info('IO connection');
-
-    socket.on('disconnect', function () {
-        intel.getLogger('app').info('IO disconect');
-
-    });
-});
 var countMessagesPerBulk = 0;
 var messageBuffer = [];
 
@@ -32,7 +21,7 @@ var TIME_LIMIT_TO_FLUSH = 5000;
 var connection = amqp.createConnection(config.amqp);
 
 connection.on('ready', function () {
-    intel.getLogger('app').info('connection: ready');
+    intel.getLogger('app').info('AMQP :: connection: ready');
     // Use the default 'amq.topic' exchange
     //connection.queue('toElastic', function (q) {
     //
