@@ -9,7 +9,7 @@ var util = new require("util");
 var elastic = new require('./elastic');
 var intel = new require('./logger');
 var sendGrid = new require('./sendGrid');
-var sockets = new require('./sockets');
+var sockets = new require('./sockets/sockets');
 
 var countMessagesPerBulk = 0;
 var messageBuffer = [];

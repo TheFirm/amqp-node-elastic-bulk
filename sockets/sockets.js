@@ -1,5 +1,5 @@
-var intel = new require('./logger');
-var config = require('./configs/config.json').sockets;
+var intel = new require('../logger');
+var config = require('../configs/config.json').sockets;
 var io = require('socket.io').listen(config.port);
 
 var socketid_room = {};
