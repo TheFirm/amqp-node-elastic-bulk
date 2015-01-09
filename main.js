@@ -99,3 +99,5 @@ process.on('SIGINT', function() {
 process.on('uncaughtException', function(err) {
     intel.getLogger('app.errors').error(err);
 });
+
+intel.getLogger('app').info("Started.");

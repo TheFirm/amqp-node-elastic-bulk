@@ -1,5 +1,6 @@
-var io = require('socket.io').listen(3001);
 var intel = new require('./logger');
+var config = require('./configs/config.json').sockets;
+var io = require('socket.io').listen(config.port);
 
 var socketid_room = {};
 
@@ -13,7 +14,7 @@ io.sockets.on('connection', function (socket) {
     });
     socket.on('typing', function (data) {
         data.s_id = socket.id;
-        intel.getLogger('app').info("on typing", data, socket.id);
+        intel.getLogger('app').info("on typing in room " + data.room_id, data, socket.id);
 
         if(isDefined(data.room_id)){
             socket.broadcast.to(getRoomNameById(data.room_id)).emit("typing", data);
@@ -24,10 +25,9 @@ io.sockets.on('connection', function (socket) {
         intel.getLogger('app').info("on info", data, socket.id);
 
         if(isDefined(data.room_id)){
-            var drid = data.room_id;
-            intel.getLogger('app').info("on info room_id #", drid);
-            socket.join(getRoomNameById(drid));
-            socketid_room[socket.id].push(drid);
+            intel.getLogger('app').info("on info room_id #", data.room_id);
+            socket.join(getRoomNameById(data.room_id));
+            socketid_room[socket.id].push(data.room_id);
         }
     });
 });

@@ -12,5 +12,8 @@
     "sendgrid": {
         "user": "test",
         "pass": "test"
+    },
+    "sockets": {
+        "port": 3001
     }
 }
