@@ -4,6 +4,16 @@ var io = require('socket.io').listen(config.port);
 
 var socketid_room = {};
 
+io.set('force new connection', true);
+io.set('transports', [
+      'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+    , 'polling'
+]);
+
 io.sockets.on('connection', function (socket) {
     intel.getLogger('app').info('IO connection', socket.id);
     socketid_room[socket.id] = [];
@@ -12,6 +22,7 @@ io.sockets.on('connection', function (socket) {
         intel.getLogger('app').info('IO disconect', socket.id);
         delete socketid_room[socket.id];
     });
+
     socket.on('typing', function (data) {
         data.s_id = socket.id;
         intel.getLogger('app').info("on typing in room " + data.room_id, data, socket.id);
@@ -32,11 +43,11 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-function getRoomNameById(id){
-    return 'room#'. id
+function getRoomNameById(id) {
+    return 'room#'+ id
 }
 
-function isDefined(obj){
+function isDefined(obj) {
     return typeof obj != 'undefined';
 }
 
