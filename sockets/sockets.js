@@ -3,7 +3,7 @@ var config = require('../configs/config.json').sockets;
 var io = require('socket.io').listen(config.port);
 
 var socketid_room = {};
-var onlineCount = 0;
+// var onlineCount = 0;
 
 io.set('force new connection', true);
 io.set('transports', [
@@ -16,14 +16,14 @@ io.set('transports', [
 ]);
 
 io.sockets.on('connection', function (socket) {
-    onlineCount++;
+    // onlineCount++;
     intel.getLogger('app').info('IO connection', socket.id);
-    socket.send({'onlineCount': onlineCount});
+    // socket.send({'onlineCount': onlineCount});
 
     socketid_room[socket.id] = [];
 
     socket.on('disconnect', function () {
-        onlineCount--;
+        // onlineCount--;
         intel.getLogger('app').info('IO disconect', socket.id);
         delete socketid_room[socket.id];
     });
