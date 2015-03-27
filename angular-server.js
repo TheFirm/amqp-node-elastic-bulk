@@ -43,9 +43,11 @@ var renderHtml = function(url, cb) {
 
 server.listen(port, function (request, response) {
     var route = parse_qs(request.url)._escaped_fragment_;
-    var url = urlPrefix
-      + '/' + request.url.slice(1, request.url.indexOf('?'))
-      + (route ? decodeURIComponent(route) : '');
+    // var url = urlPrefix
+    //   + '/' + request.url.slice(1, request.url.indexOf('?'))
+    //   + (route ? decodeURIComponent(route) : '');
+
+    var url = urlPrefix + '/' + request.url;
 
     renderHtml(url, function(html) {
         response.statusCode = 200;
